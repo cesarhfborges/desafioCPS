@@ -13,6 +13,10 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
   },
+  {
+    path: '**',
+    redirectTo: '/investimentos'
+  },
 ];
 
 @NgModule({

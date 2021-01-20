@@ -1,13 +1,15 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BaseLayoutComponent} from './layout/base-layout/base-layout.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt-PT';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localePt);
 
@@ -18,7 +20,10 @@ registerLocaleData(localePt);
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-PT'},

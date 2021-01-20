@@ -1,1 +1,25 @@
-<p>investimentos works!</p>
+<div class="card">
+  <div class="card-body">
+    <p-table [value]="investimentos" [columns]="cols">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr class="clickable" (click)="open(rowData)">
+          <td *ngFor="let col of columns" [ngSwitch]="col.type">
+            <ng-template ngSwitchDefault>
+              {{rowData[col.field]}}
+            </ng-template>
+            <ng-template ngSwitchCase="money">
+              R$ {{rowData[col.field] | number : '1.2-2'}}
+            </ng-template>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

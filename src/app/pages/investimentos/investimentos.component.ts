@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {InvestimentosService} from '../../shared/services/investimentos.service';
+import {Investimento} from '../../shared/models/investimento';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-investimentos',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvestimentosComponent implements OnInit {
 
-  constructor() { }
+  investimentos: Investimento[];
 
-  ngOnInit(): void {
+  cols = [
+    {field: 'nome', header: 'NOME', type: 'string'},
+    {field: 'objetivo', header: 'OBJETIVO', type: 'string'},
+    {field: 'saldoTotalDisponivel', header: 'SALDO TOTAL DISPONIVEL', type: 'money'},
+  ];
+
+  constructor(
+    private insestimentosService: InvestimentosService,
+    private router: Router,
+  ) {
   }
 
+  ngOnInit(): void {
+    this.getInvestimentos();
+  }
+
+  getInvestimentos(): void {
+    this.insestimentosService.getInvestimentos().subscribe(
+      res => {
+        console.log(res);
+        this.investimentos = res;
+      }
+    );
+  }
+
+  open(rData: Investimento): void {
+    console.log(rData.nome);
+    if (rData.indicadorCarencia === 'N') {
+      this.router.navigate(['/investimentos', rData.nome]);
+    }
+  }
 }
