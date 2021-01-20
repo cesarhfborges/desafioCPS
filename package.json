@@ -1,9 +1,14 @@
 {
   "name": "desafio-cps",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": {
+    "name": "Cesar Henrique",
+    "email": "cesarfborges@yahoo.com.br",
+    "url": ""
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
