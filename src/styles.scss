@@ -9,3 +9,12 @@
 div.card {
   border-color: #7D8990;
 }
+
+.form-control.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+.btn-info {
+ background: #007BCC;
+  border-color: #007BCC;
+}

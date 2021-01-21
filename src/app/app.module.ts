@@ -8,9 +8,10 @@ import {BaseLayoutComponent} from './layout/base-layout/base-layout.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {registerLocaleData} from '@angular/common';
-import localePt from '@angular/common/locales/pt-PT';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import localePt from '@angular/common/locales/pt';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 registerLocaleData(localePt);
 
@@ -26,9 +27,11 @@ registerLocaleData(localePt);
     RouterModule,
     AppRoutingModule,
     NgbModule,
+    NgxCurrencyModule,
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt-PT'},
+    NgbActiveModal,
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]

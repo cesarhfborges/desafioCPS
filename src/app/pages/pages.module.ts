@@ -6,6 +6,9 @@ import {InvestimentosComponent} from './investimentos/investimentos.component';
 import {TableModule} from 'primeng/table';
 import {ResgatePersonalizadoComponent} from './resgate-personalizado/resgate-personalizado.component';
 import {RouterModule} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgxCurrencyModule} from 'ngx-currency';
+import {NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,6 +18,9 @@ import {RouterModule} from '@angular/router';
     PagesRoutingModule,
     TableModule,
     RouterModule,
+    ReactiveFormsModule,
+    NgxCurrencyModule,
+    NgbDatepickerModule,
   ]
 })
 export class PagesModule {

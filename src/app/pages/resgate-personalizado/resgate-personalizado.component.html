@@ -1,4 +1,4 @@
-<h2>DADOS DO INVESTIMENTO</h2>
+<h3 class="custom-color">DADOS DO INVESTIMENTO</h3>
 <div class="card">
   <div class="card-body">
     <div class="row">
@@ -12,15 +12,60 @@
       </div>
       <div class="col-4">
         <label>Valor total a resgatar</label>
-        <p class="p-0 m-0">{{investimento?.nome}}</p>
+        <p class="p-0 m-0">{{totalAResgatar | number : '1.2-2'}}</p>
       </div>
     </div>
   </div>
 </div>
 <br>
-<h2>RESGATE DO SEU JEITO</h2>
+<h3 class="custom-color">RESGATE DO SEU JEITO</h3>
 <div class="card">
-  <div class="card-body">
-    asdfasdfa
+  <div class="card-body p-0">
+    <form [formGroup]="form">
+      <table class="table mb-0" formArrayName="acoes">
+        <thead>
+          <tr>
+            <th scope="col">AÇÃO</th>
+            <th scope="col">SALDO ACUMULADO</th>
+            <th scope="col">VALOR A RESGATAR</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let acao of form.get('acoes')['controls']; let i = index" [formGroupName]="i">
+          <th>
+            {{acao.value['nome']}}
+          </th>
+          <td>
+            R$ {{acao.value['saldo'] | number : '1.2-2'}}
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="valor"
+              placeholder="0,00"
+              type="text"
+              currencyMask
+              [options]="{ prefix: 'R$ ', thousands: '.', allowNegative: false, nullable: true, decimal: ',' }"
+              inputmode="financial"
+              prefix="R$"
+            >
+            <small
+              *ngIf="acoes.value[i].valor && acoes.value[i].valor > acao.value['saldo']"
+              class="form-text text-danger"
+            >Ops. o valor informado é superior ao valor máximo de resgate.</small>
+            <small
+              *ngIf="acoes.value[i].valor == 0"
+              class="form-text text-danger"
+            >Ops. o valor informado não pode ser 0(zero).</small>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-12 d-flex justify-content-end">
+    <button type="button" class="btn btn-info" (click)="onSubmit()">CONFIRMAR RESGATE</button>
   </div>
 </div>

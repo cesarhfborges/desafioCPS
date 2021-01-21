@@ -12,7 +12,7 @@ export class InvestimentosComponent implements OnInit {
 
   investimentos: Investimento[];
 
-  cols = [
+  public cols = [
     {field: 'nome', header: 'NOME', type: 'string'},
     {field: 'objetivo', header: 'OBJETIVO', type: 'string'},
     {field: 'saldoTotalDisponivel', header: 'SALDO TOTAL DISPONIVEL', type: 'money'},
@@ -38,7 +38,6 @@ export class InvestimentosComponent implements OnInit {
   }
 
   open(rData: Investimento): void {
-    console.log(rData.nome);
     if (rData.indicadorCarencia === 'N') {
       sessionStorage.setItem('data', JSON.stringify(rData));
       this.router.navigate(['/resgate-personalizado']);
