@@ -40,7 +40,8 @@ export class InvestimentosComponent implements OnInit {
   open(rData: Investimento): void {
     console.log(rData.nome);
     if (rData.indicadorCarencia === 'N') {
-      this.router.navigate(['/investimentos', rData.nome]);
+      sessionStorage.setItem('data', JSON.stringify(rData));
+      this.router.navigate(['/resgate-personalizado']);
     }
   }
 }

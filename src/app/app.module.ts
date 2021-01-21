@@ -10,18 +10,20 @@ import {RequestInterceptor} from './shared/interceptors/request.interceptor';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt-PT';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {RouterModule} from '@angular/router';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    BaseLayoutComponent
+    BaseLayoutComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    RouterModule,
     AppRoutingModule,
     NgbModule,
   ],

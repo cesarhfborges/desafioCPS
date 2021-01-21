@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ActivationEnd, NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-base-layout',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseLayoutComponent implements OnInit {
 
-  constructor() { }
+  pageTitle = 'Carregando...';
+
+  constructor(
+    private router: Router,
+  ) {
+    this.router.events.subscribe(
+      (res) => {
+        if (res instanceof ActivationEnd && res.snapshot.data.pageTitle) {
+          this.pageTitle = res.snapshot.data.pageTitle;
+        }
+      }
+    );
+  }
 
   ngOnInit(): void {
   }
-
 }
