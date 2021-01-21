@@ -102,11 +102,6 @@ export class ResgatePersonalizadoComponent implements OnInit {
       });
     } else {
       const mdError = this.modalService.open(ModalAlertComponent, {centered: true});
-      console.log(
-        this.form.errors,
-        this.form.get('acoes').errors,
-        this.form.get('acoes').value.map(e => e.errors)
-      );
       mdError.componentInstance.modalErrors = this.form.errors;
     }
   }
