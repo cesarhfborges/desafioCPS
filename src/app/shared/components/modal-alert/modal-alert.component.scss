@@ -1,0 +1,11 @@
+button.close {
+  position: absolute;
+  top: 22px;
+  right: 31px;
+  z-index: 99999999;
+}
+
+div.row.border {
+  border-color: red;
+  border-radius: 4px;
+}

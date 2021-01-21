@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Investimento} from '../../shared/models/investimento';
 import {Router} from '@angular/router';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalConfirmComponent} from '../../shared/components/modal-confirm/modal-confirm.component';
+import {ModalAlertComponent} from '../../shared/components/modal-alert/modal-alert.component';
 
 @Component({
   selector: 'app-resgate-personalizado',
@@ -21,7 +22,15 @@ export class ResgatePersonalizadoComponent implements OnInit {
     private modalService: NgbModal,
   ) {
     this.form = new FormGroup({
-      acoes: new FormArray([]),
+      acoes: new FormArray([], []),
+    }, {
+      validators: (abstractControl: AbstractControl) => {
+        const vals = abstractControl.get('acoes').value.filter(ac => ac.valor != null);
+        if (vals.length < 1) {
+          return {requiredAcoes: true};
+        }
+        return null;
+      }
     });
   }
 
@@ -62,10 +71,15 @@ export class ResgatePersonalizadoComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       console.log('certo');
-      const modalRef = this.modalService.open(ModalConfirmComponent, { size: 'lg', centered: true });
+      const modalRef = this.modalService.open(ModalConfirmComponent, {size: 'lg', centered: true});
+      modalRef.result.then((result) => {
+        this.router.navigate(['/investimentos']);
+      });
       modalRef.componentInstance.name = 'World';
     } else {
       console.log('errado');
+      const mdError = this.modalService.open(ModalAlertComponent, {centered: true});
+      mdError.componentInstance.modalErrors = 'Teste';
     }
   }
 }
