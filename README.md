@@ -34,3 +34,4 @@ Build do sistema
 ```
 ng build  --aot
 ```
+Parametro AOT diminui o número de requisições assíncronas, gera um código menor e outros benefícios, como um código mais seguro.
