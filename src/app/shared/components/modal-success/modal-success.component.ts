@@ -2,13 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-modal-alert',
-  templateUrl: './modal-alert.component.html',
-  styleUrls: ['./modal-alert.component.scss']
+  selector: 'app-modal-success',
+  templateUrl: './modal-success.component.html',
+  styleUrls: ['./modal-success.component.scss']
 })
-export class ModalAlertComponent implements OnInit {
-
-  @Input() modalErrors;
+export class ModalSuccessComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,

@@ -5,6 +5,7 @@ import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@a
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalConfirmComponent} from '../../shared/components/modal-confirm/modal-confirm.component';
 import {ModalAlertComponent} from '../../shared/components/modal-alert/modal-alert.component';
+import {ModalSuccessComponent} from '../../shared/components/modal-success/modal-success.component';
 
 @Component({
   selector: 'app-resgate-personalizado',
@@ -27,7 +28,7 @@ export class ResgatePersonalizadoComponent implements OnInit {
       validators: (abstractControl: AbstractControl) => {
         const vals = abstractControl.get('acoes').value.filter(ac => ac.valor != null);
         if (vals.length < 1) {
-          return {requiredAcoes: true};
+          return {error: 'requiredAcoes'};
         }
         return null;
       }
@@ -39,6 +40,10 @@ export class ResgatePersonalizadoComponent implements OnInit {
   }
 
   get totalAResgatar(): number {
+    return this.acoes.value.map(i => i.valor).reduce((a, b) => (a + b));
+  }
+
+  get restanteResgatar(): number {
     return this.acoes.value.map(i => i.saldo - i.valor).reduce((a, b) => (a + b));
   }
 
@@ -65,21 +70,44 @@ export class ResgatePersonalizadoComponent implements OnInit {
       nome: new FormControl(null, [Validators.required]),
       saldo: new FormControl(null, [Validators.required]),
       valor: new FormControl(null, [Validators.min(.01)]),
+    }, {
+      validators: (abstractControll: AbstractControl) => {
+        if (abstractControll.value.valor) {
+          if (abstractControll.value.valor as number > abstractControll.value.saldo) {
+            return {error: 'requiredSaldo'};
+          }
+        }
+        return null;
+      }
     });
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log('certo');
-      const modalRef = this.modalService.open(ModalConfirmComponent, {size: 'lg', centered: true});
-      modalRef.result.then((result) => {
-        this.router.navigate(['/investimentos']);
+      const modalConfirm = this.modalService.open(ModalConfirmComponent, {size: 'lg', centered: true});
+      modalConfirm.componentInstance.investimento = {
+        nome: this.investimento.nome,
+        saldoTotalDisponivel: this.investimento.saldoTotalDisponivel,
+        acoes: this.acoes.value.filter(v => v.valor != null),
+      };
+      modalConfirm.result.then((result) => {
+        if (result) {
+          const modalSuc = this.modalService.open(ModalSuccessComponent, {size: 'lg', centered: true});
+          modalSuc.result.then((res) => {
+            if (res) {
+              this.router.navigate(['/investimentos']);
+            }
+          });
+        }
       });
-      modalRef.componentInstance.name = 'World';
     } else {
-      console.log('errado');
       const mdError = this.modalService.open(ModalAlertComponent, {centered: true});
-      mdError.componentInstance.modalErrors = 'Teste';
+      console.log(
+        this.form.errors,
+        this.form.get('acoes').errors,
+        this.form.get('acoes').value.map(e => e.errors)
+      );
+      mdError.componentInstance.modalErrors = this.form.errors;
     }
   }
 }

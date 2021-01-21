@@ -1,12 +1,18 @@
 <div class="modal-body">
 
   <div class="row mx-1 border">
-    <div class="col-12">
-      <h4 class="modal-title text-center mt-2">RESGATE EFETUADO COM SUCCESSO!</h4>
-      <p class="p-0 m-0 text-center mt-4">O valor solicitado estará em sua conta em até 5 dias úteis. {{name}}!</p>
+    <div class="col-12" *ngIf="investimento">
+      <h4 class="modal-title text-center mt-2">DETALHES DO RESGATE</h4>
+      <h5>Dados principais</h5>
+      <p class="p-0 m-0">Investimento: {{investimento.nome}}</p>
+      <p class="p-0 m-0">Saldo Atual: R$ {{investimento.saldoTotalDisponivel | number : '1.2-2'}}</p>
+      <h5>Valores a serem resgatados</h5>
+      <p class="p-0 m-0" *ngFor="let res of investimento.acoes">{{res.nome}}: R$ {{res.saldo| number : '1.2-2'}}</p>
+
     </div>
-    <div class="col-12 mt-5 mb-4 d-flex justify-content-center">
-      <button type="button" class="btn btn-info" (click)="activeModal.close(true)">NOVO RESGATE</button>
+    <div class="col-12 mt-5 mb-4 d-flex justify-content-between">
+      <button type="button" class="btn btn-secondary" (click)="activeModal.close(false)">CANCELAR</button>
+      <button type="button" class="btn btn-info" (click)="activeModal.close(true)">CONFIRMAR</button>
     </div>
   </div>
 

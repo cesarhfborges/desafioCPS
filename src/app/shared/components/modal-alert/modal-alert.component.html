@@ -6,7 +6,17 @@
   <div class="row mx-1 border">
     <div class="col-12">
       <h4 class="modal-title text-center mt-2">OPS!</h4>
-      <p class="p-0 m-0 text-center mt-4"><p>É necessário informar o valor a resgatar de ao menos ao menos uma das ações.</p>
+      <p class="p-0 m-0 text-center mt-4" [ngSwitch]="modalErrors?.error">
+        <ng-template ngSwitchDefault>
+          O valor informado é superior ao valor máximo de resgate.
+        </ng-template>
+        <ng-template ngSwitchCase="requiredAcoes">
+          É necessário informar o valor a resgatar de ao menos ao menos uma das ações.
+        </ng-template>
+        <ng-template ngSwitchCase="requiredSaldo">
+          Saldo insuficiente.
+        </ng-template>
+      </p>
     </div>
     <div class="col-12 mt-5 mb-4 d-flex justify-content-center">
       <button type="button" class="btn btn-info" (click)="activeModal.close('close')">FECHAR</button>

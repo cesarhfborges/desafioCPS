@@ -12,6 +12,7 @@ import localePt from '@angular/common/locales/pt';
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import { NgxCurrencyModule } from 'ngx-currency';
+import {SharedModule} from './shared/shared.module';
 
 registerLocaleData(localePt);
 
@@ -28,6 +29,7 @@ registerLocaleData(localePt);
     AppRoutingModule,
     NgbModule,
     NgxCurrencyModule,
+    SharedModule,
   ],
   providers: [
     NgbActiveModal,
