@@ -12,7 +12,18 @@
       </div>
       <div class="col-4">
         <label>Valor total a resgatar</label>
-        <p class="detail  p-0 m-0">R$ {{totalAResgatar | number : '1.2-2'}}</p>
+        <p class="detail  p-0 m-0">
+          <ng-template [ngIf]="totalAResgatar >= 0" [ngIfElse]="opsErro">
+            R$ {{totalAResgatar | number : '1.2-2'}}
+          </ng-template>
+          <ng-template #opsErro>
+            R$ {{investimento?.saldoTotalDisponivel | number : '1.2-2'}}
+          </ng-template>
+        </p>
+        <small
+          *ngIf="totalAResgatar < 0"
+          class="form-text text-danger"
+        >Ops. a soma de valores a resgatar é superior ao saldo disponível.</small>
       </div>
     </div>
   </div>
@@ -65,7 +76,8 @@
   </div>
 </div>
 <div class="row mt-2">
-  <div class="col-12 d-flex justify-content-end">
+  <div class="col-12 d-flex justify-content-between">
+    <button type="button" class="btn btn-secondary" [routerLink]="['/investimentos']">CANCELAR</button>
     <button type="button" class="btn btn-info" (click)="onSubmit()">CONFIRMAR RESGATE</button>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <p-table [value]="investimentos" [columns]="cols">
+    <p-table [value]="investimentos" [loading]="loading.investimentos" [columns]="cols" dataKey="nome">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">
@@ -17,6 +17,20 @@
             <ng-template ngSwitchCase="money">
               R$ {{rowData[col.field] | number : '1.2-2'}}
             </ng-template>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loading">
+        <tr>
+          <td [colSpan]="cols.length" class="text-center">
+            Aguarde carregando...
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [colSpan]="cols.length" class="text-center">
+            Parece que vocâ não possuir investimentos. :(
           </td>
         </tr>
       </ng-template>

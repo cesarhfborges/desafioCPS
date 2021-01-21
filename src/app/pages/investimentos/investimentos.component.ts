@@ -10,7 +10,11 @@ import {Router} from '@angular/router';
 })
 export class InvestimentosComponent implements OnInit {
 
-  investimentos: Investimento[];
+  public loading = {
+    investimentos: false,
+  };
+
+  public investimentos: Investimento[];
 
   public cols = [
     {field: 'nome', header: 'NOME', type: 'string'},
@@ -29,10 +33,15 @@ export class InvestimentosComponent implements OnInit {
   }
 
   getInvestimentos(): void {
+    this.loading.investimentos = true;
     this.insestimentosService.getInvestimentos().subscribe(
       res => {
-        console.log(res);
         this.investimentos = res;
+        this.loading.investimentos = false;
+      },
+      error => {
+        console.log(error);
+        this.loading.investimentos = false;
       }
     );
   }
