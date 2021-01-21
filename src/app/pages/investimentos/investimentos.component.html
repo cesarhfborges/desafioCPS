@@ -9,7 +9,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr class="clickable" (click)="open(rowData)">
+        <tr [className]="rowData.indicadorCarencia === 'N' ? 'lineHover clickable' : 'lineHover dontClickable'" (click)="open(rowData)">
           <td *ngFor="let col of columns" [ngSwitch]="col.type">
             <ng-template ngSwitchDefault>
               {{rowData[col.field]}}

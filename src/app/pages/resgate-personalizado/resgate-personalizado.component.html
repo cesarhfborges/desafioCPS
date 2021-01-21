@@ -4,15 +4,15 @@
     <div class="row">
       <div class="col-4 border-right">
         <label>Nome</label>
-        <p class="p-0 m-0">{{investimento?.nome}}</p>
+        <p class="detail p-0 m-0">{{investimento?.nome}}</p>
       </div>
       <div class="col-4 border-right">
         <label>Saldo total disponível</label>
-        <p class="p-0 m-0">R$ {{investimento?.saldoTotalDisponivel | number : '1.2-2'}}</p>
+        <p class="detail  p-0 m-0">R$ {{investimento?.saldoTotalDisponivel | number : '1.2-2'}}</p>
       </div>
       <div class="col-4">
         <label>Valor total a resgatar</label>
-        <p class="p-0 m-0">{{totalAResgatar | number : '1.2-2'}}</p>
+        <p class="detail  p-0 m-0">R$ {{totalAResgatar | number : '1.2-2'}}</p>
       </div>
     </div>
   </div>

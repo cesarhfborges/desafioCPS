@@ -1,6 +1,12 @@
-.clickable {
-  cursor: pointer;
+.lineHover {
+  &.clickable {
+    cursor: pointer;
+  }
+  &.dontClickable {
+    cursor: not-allowed;
+  }
   &:hover {
     background: rgba(0,0,0,.3);
+    color: #FFFFFF;
   }
 }

@@ -62,7 +62,7 @@ export class ResgatePersonalizadoComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       console.log('certo');
-      const modalRef = this.modalService.open(ModalConfirmComponent);
+      const modalRef = this.modalService.open(ModalConfirmComponent, { size: 'lg', centered: true });
       modalRef.componentInstance.name = 'World';
     } else {
       console.log('errado');
