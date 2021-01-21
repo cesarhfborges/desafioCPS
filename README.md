@@ -11,6 +11,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [NG Bootstrap](https://ng-bootstrap.github.io/#/components/accordion/examples)
 - [NGX Currency MASK](https://www.npmjs.com/package/ngx-currency)
 
+## Como Iniciar
+Antes de iniciar a manipulação de codigo é necessário baixar as dependencias do projeto.
+```
+npm install
+```
+
+## Como Rodar
+O projeto automaticamente abre o navegador ao finalizar o start
+```
+npm start
+```
+
 ## Build
 
 Build de producao do sistema  
